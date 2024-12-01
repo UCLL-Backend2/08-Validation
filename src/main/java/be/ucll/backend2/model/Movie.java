@@ -1,6 +1,8 @@
 package be.ucll.backend2.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,10 +13,13 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String title;
 
+    @NotBlank
     private String director;
 
+    @Min(1888)
     private int year;
 
     @ManyToMany(fetch = FetchType.EAGER)

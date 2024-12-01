@@ -2,6 +2,7 @@ package be.ucll.backend2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "every actor has a name")
     private String name;
 
     @ManyToMany(mappedBy = "actors")
