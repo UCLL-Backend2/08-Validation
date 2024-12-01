@@ -3,6 +3,7 @@ package be.ucll.backend2.controller;
 import be.ucll.backend2.exception.ActorNotFoundException;
 import be.ucll.backend2.model.Actor;
 import be.ucll.backend2.service.ActorService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +33,12 @@ public class ActorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Actor createActor(@RequestBody Actor actor) {
+    public Actor createActor(@Valid @RequestBody Actor actor) {
         return actorService.createActor(actor);
     }
 
     @PutMapping("/{id}")
-    public Actor updateActor(@PathVariable long id, @RequestBody Actor actor) throws ActorNotFoundException {
+    public Actor updateActor(@PathVariable long id, @Valid @RequestBody Actor actor) throws ActorNotFoundException {
         return actorService.updateActor(id, actor);
     }
 
