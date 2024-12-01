@@ -110,6 +110,22 @@ public class HttpTest {
     }
 
     @Test
+    public void whenAddingActorWithBlankName_then400IsReturned() {
+        client.post()
+                .uri("/api/v1/actor")
+                .header("Content-Type", "application/json")
+                .bodyValue("""
+                        {
+                          "name": "   "
+                        }
+                        """)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody()
+                .jsonPath("$.name").isEqualTo("every actor has a name");
+    }
+
+    @Test
     public void givenActorFrancesMcDormand_whenInvokingDelete1_thenFrancesMcDormandIsRemovedFromDb() {
         client.delete()
                 .uri("/api/v1/actor/1")
@@ -251,5 +267,15 @@ public class HttpTest {
                 .expectStatus().is2xxSuccessful()
                 .expectBody()
                 .json("[]");
+    }
+
+    @Test
+    public void whenInvokingGetMoviesBetween1800And2000_then400IsReturned() {
+        client.get()
+                .uri("/api/v1/movie?startYear=1800&endYear=2000")
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody()
+                .jsonPath("$.startYear").isEqualTo("must be greater than or equal to 1888");
     }
 }
