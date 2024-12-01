@@ -13,6 +13,7 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // We kunnen de error message aanpassen
     @NotBlank(message = "every actor has a name")
     private String name;
 
