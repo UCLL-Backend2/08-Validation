@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "c953d8ad-0492-4a98-b79a-db41bfedeb8e",
-		"name": "Backend 2 - Herhaling",
+		"_postman_id": "b4322a9d-943d-45d1-b820-fe32578326de",
+		"name": "Backend 2 - Validation",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "30232115"
 	},
@@ -45,6 +45,46 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"name\": \"Jos Bosmans\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/actor",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"actor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /api/v1/actor (empty name)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"actor_id\", pm.response.json().id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"  \"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -176,6 +216,35 @@
 						{
 							"key": "endYear",
 							"value": "2010"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /api/v1/movie with start year before 1888",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/v1/movie?startYear=1800&endYear=2000",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movie"
+					],
+					"query": [
+						{
+							"key": "startYear",
+							"value": "1800"
+						},
+						{
+							"key": "endYear",
+							"value": "2000"
 						}
 					]
 				}
